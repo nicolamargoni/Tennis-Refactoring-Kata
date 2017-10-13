@@ -16,7 +16,7 @@ public class TennisScore {
 
     public String getScore() {
         String score = "";
-        if (player1.getScore() == player2.getScore()) {
+        if (areScoresEqual()) {
             score = getScoreWhenIsEqual();
         } else if (player1.getScore() >= 4 || player2.getScore() >= 4) {
             score = getScoreWhenAPlayerIsAdvantageOrWin();
@@ -24,6 +24,10 @@ public class TennisScore {
             score = getScoreWhenTheScoresAreDifferent();
         }
         return score;
+    }
+
+    private boolean areScoresEqual(){
+        return player1.getScore() == player2.getScore();
     }
 
     private String getScoreWhenIsEqual() {

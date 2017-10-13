@@ -2,13 +2,13 @@ public class TennisScore {
     private TennisPlayer player1;
     private TennisPlayer player2;
 
-    public TennisScore(String player1Name, String player2Name){
+    public TennisScore(String player1Name, String player2Name) {
         player1 = new TennisPlayer(player1Name);
         player2 = new TennisPlayer(player2Name);
     }
 
     public void wonPoint(String playerName) {
-        if (playerName == player1.getName())
+        if (playerName.equals(player1.getName()))
             player1.incrementPoint();
         else
             player2.incrementPoint();
@@ -26,11 +26,11 @@ public class TennisScore {
         return score;
     }
 
-    private boolean areScoresEqual(){
+    private boolean areScoresEqual() {
         return player1.getScore() == player2.getScore();
     }
 
-    private boolean therIsAPlayerInTheLeadOrWinner(){
+    private boolean therIsAPlayerInTheLeadOrWinner() {
         return player1.getScore() >= 4 || player2.getScore() >= 4;
     }
 
@@ -63,7 +63,7 @@ public class TennisScore {
         return result;
     }
 
-    private String getScoreWhenTheScoresAreDifferent(){
+    private String getScoreWhenTheScoresAreDifferent() {
         String result = "";
         int tempScore = 0;
         for (int i = 1; i < 3; i++) {

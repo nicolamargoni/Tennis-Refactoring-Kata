@@ -13,7 +13,7 @@ public class TennisScore {
     static final String SCORE_THIRTY = "Thirty";
     static final String SCORE_FORTY = "Forty";
     static final String SCORE_SEPARATOR = "-";
-    
+
     static final String STRING_EMPTY = "";
 
     private TennisPlayer player1;
@@ -32,15 +32,13 @@ public class TennisScore {
     }
 
     public String getScore() {
-        String score = "";
         if (areScoresEqual()) {
-            score = getScoreWhenIsEqual();
+            return getScoreWhenIsEqual();
         } else if (therIsAPlayerInTheLeadOrWinner()) {
-            score = getScoreWhenAPlayerIsAdvantageOrWin();
+            return getScoreWhenAPlayerIsAdvantageOrWin();
         } else {
-            score = getScoreWhenTheScoresAreDifferent();
+            return getScoreWhenTheScoresAreDifferent();
         }
-        return score;
     }
 
     private boolean areScoresEqual() {
@@ -52,32 +50,29 @@ public class TennisScore {
     }
 
     private String getScoreWhenIsEqual() {
-        String result;
         switch (player1.getScore()) {
             case 0:
-                result = SCORE_LOVE_ALL;
-                break;
+                return SCORE_LOVE_ALL;
             case 1:
-                result = SCORE_FIFTEEN_ALL;
-                break;
+                return SCORE_FIFTEEN_ALL;
             case 2:
-                result = SCORE_THIRTY_ALL;
-                break;
+                return SCORE_THIRTY_ALL;
             default:
-                result = SCORE_DEUCE;
-                break;
+                return SCORE_DEUCE;
         }
-        return result;
     }
 
     private String getScoreWhenAPlayerIsAdvantageOrWin() {
-        String result;
         int minusResult = player1.getScore() - player2.getScore();
-        if (minusResult == 1) result = SCORE_ADVANTAGE_PLAYER_ONE;
-        else if (minusResult == -1) result = SCORE_ADVANTAGE_PLAYER_TWO;
-        else if (minusResult >= 2) result = SCORE_WIN_PLAYER_ONE;
-        else result = SCORE_WIN_PLAYER_TWO;
-        return result;
+        if (minusResult == 1) {
+            return SCORE_ADVANTAGE_PLAYER_ONE;
+        } else if (minusResult == -1) {
+            return SCORE_ADVANTAGE_PLAYER_TWO;
+        } else if (minusResult >= 2) {
+            return SCORE_WIN_PLAYER_ONE;
+        } else {
+            return SCORE_WIN_PLAYER_TWO;
+        }
     }
 
     private String getScoreWhenTheScoresAreDifferent() {

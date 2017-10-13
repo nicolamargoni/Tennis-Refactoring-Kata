@@ -1,26 +1,24 @@
 public class TennisScore {
-    private int m_score1 = 0;
-    private int m_score2 = 0;
-    private String player1Name;
-    private String player2Name;
+    private TennisPlayer player1;
+    private TennisPlayer player2;
 
     public TennisScore(String player1Name, String player2Name){
-        this.player1Name = player1Name;
-        this.player2Name = player2Name;
+        player1 = new TennisPlayer(player1Name);
+        player2 = new TennisPlayer(player2Name);
     }
 
     public void wonPoint(String playerName) {
-        if (playerName == player1Name)
-            m_score1 += 1;
+        if (playerName == player1.getName())
+            player1.incrementPoint();
         else
-            m_score2 += 1;
+            player2.incrementPoint();
     }
 
     public String getScore() {
         String score = "";
-        if (m_score1 == m_score2) {
+        if (player1.getScore() == player2.getScore()) {
             score = getScoreWhenIsEqual();
-        } else if (m_score1 >= 4 || m_score2 >= 4) {
+        } else if (player1.getScore() >= 4 || player2.getScore() >= 4) {
             score = getScoreWhenAPlayerIsAdvantageOrWin();
         } else {
             score = getScoreWhenTheScoresAreDifferent();
@@ -30,7 +28,7 @@ public class TennisScore {
 
     private String getScoreWhenIsEqual() {
         String result;
-        switch (m_score1) {
+        switch (player1.getScore()) {
             case 0:
                 result = "Love-All";
                 break;
@@ -49,7 +47,7 @@ public class TennisScore {
 
     private String getScoreWhenAPlayerIsAdvantageOrWin() {
         String result;
-        int minusResult = m_score1 - m_score2;
+        int minusResult = player1.getScore() - player2.getScore();
         if (minusResult == 1) result = "Advantage player1";
         else if (minusResult == -1) result = "Advantage player2";
         else if (minusResult >= 2) result = "Win for player1";
@@ -61,10 +59,10 @@ public class TennisScore {
         String result = "";
         int tempScore = 0;
         for (int i = 1; i < 3; i++) {
-            if (i == 1) tempScore = m_score1;
+            if (i == 1) tempScore = player1.getScore();
             else {
                 result += "-";
-                tempScore = m_score2;
+                tempScore = player2.getScore();
             }
             switch (tempScore) {
                 case 0:
